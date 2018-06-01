@@ -1,0 +1,53 @@
+function getTableData() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+        {
+            obj = JSON.parse(this.responseText);
+            if(obj.status == 'ok')
+            {
+                var columns = '';
+                var col;
+                for(col in obj.columns)
+                {
+                  columns += "<th>";
+                  columns += makeColTitle(obj.columns[col], "_")
+                  columns += "</th>";
+                }
+      
+                columns +="<th id='operation-col-title'>Item Operation</th>";
+                document.getElementById("pianists-titles").innerHTML = columns;
+                var content = '';
+
+                for (var i = 0; i < obj.result.length; i++)
+                {
+                    content += "<tr id=\'" + obj.result[i][0] +"\'>";
+                    
+                  for (var col = 1; col < obj.result[i].length; col++)
+                  {      
+                      content += "<td class='" + obj.columns[col -1] + "'>"; 
+                      if(obj.result[i][col] == null)
+                        content += "</td>";
+                      else
+                        content += obj.result[i][col] + "</td>";
+                  }
+                  content += "<td class='operation'>" ;
+                  content +="<button  onclick=\"deleteItem("+obj.result[i][0]
+                                + ")\">Delete</button>";
+                    
+                  content +="<button class='update'>Update</button>";
+                  content +="</td>";
+                  content += "</tr>";
+                }
+                document.getElementById("pianists-table-content").innerHTML = content;
+                
+            }
+            else
+                alert("Error occurred during fetching the data");
+        }
+    };
+
+    xhr.open("GET","php/loadTable.php",true);
+    xhr.send();
+}
+getTableData();

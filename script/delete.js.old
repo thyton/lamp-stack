@@ -1,0 +1,24 @@
+function deleteItem(i){
+  if(confirm("Are you sure?"))
+  {
+  var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200)
+    {
+      console.log(this.responseText);  
+      var obj = JSON.parse(this.responseText);
+      if(obj.status === "ok")
+      {
+          var elem = document.getElementById(i);
+          elem.parentNode.removeChild(elem);
+      }
+      else
+        alert("The deletion failed.");
+      
+    }
+  };
+      xhr.open("POST", "delete.php", true);
+      var data = "id=" + i;
+      xhr.send(data);
+  }
+}

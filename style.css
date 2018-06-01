@@ -1,0 +1,193 @@
+body {
+	background-color: #ffffff;
+	padding-left: 50px;
+	padding-right: 50px;
+	padding-top: 10px;
+}
+
+#container{
+	margin: 0 auto;
+	display: grid;
+	background-color: #778899;				 
+	padding: 10px;
+	grid-template-columns: repeat(6,fr);
+	grid-gap: 10px;
+	grid-auto-rows: minmax(50px,auto);
+	border-radius: 5px
+}
+
+#container>div{
+	display: grid;
+	background-color: #e0ffff;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+#menu-top-container {
+	grid-column: span 7;
+	grid-row: 1;
+}
+
+#sidebar-container{
+	grid-column: 6;
+	grid-row: 2/10;
+}
+
+#main-body-container{
+	grid-column: span 7;
+	grid-row: 2/15;
+	display: grid;
+	grid-template-column: repeat(4,fr);
+	grid-gap: 10px;
+	grid-auto-rows: minmax(100px, auto);
+}
+
+#main-body-container>div {
+	border: 5px solid;
+	border-radius: 2px;
+	padding: 10px;
+}
+
+#pianist-1 {
+	grid-column: 1/2;
+	grid-row: span 3;	
+}
+
+#pianist-2 {	
+	grid-column: 2/4;
+	grid-row: span 3;
+}
+
+#pianist-3 {
+	grid-column: 1/2;
+	grid-row: 4/8;
+}
+
+#pianist-4 {
+	grid-column: 2/4;
+	grid-row: span 4;
+}
+
+#table-container {
+	grid-column: span 7;
+}
+
+#add-container {
+	grid-column: 1/5;
+	grid-row: span 1;
+}
+
+#delete-container {
+	grid-column: 1/5;
+	grid-row: span 1;
+}
+
+#update-container {
+	grid-column: span 5;
+	grid-row: span 2;
+}
+ul {
+	list-style-type:none;
+}
+
+img.pianists-img{
+	float: center;	
+	max-height: 200px;
+	max-width: 350px;
+	overflow: auto;
+	margin: auto;
+	display: block;
+}
+a {
+	text-decoration: none;
+	outline: 0;
+}
+a: hover {
+	opacity: 1.0;
+	box-shadow: none;
+}
+
+p {
+	font-size: 40px;
+}
+
+#corea	{
+	color:purple;
+	text-align:center;
+	font-family:"Courier", sans-serif;
+	font-style:italic;
+}
+
+#evans {
+	color:teal;
+	text-align:center;
+	font-family:"Gill Sans", serif;
+}
+
+#hancock	{
+	color:orange;
+	text-align:center;
+	font-family:"Gill Sans",sans-serif;
+	font-style: italic;
+}
+
+#peterson	{
+	color:midnightblue;
+	text-align:center;
+	font-family:"Courier", serif;
+}
+	
+caption	{
+	font-family: "Arial";
+	font-size: 50px;
+	font-weight: bold;
+	color: pink;
+	caption-side: top;
+	text-align: middle;
+}
+table{
+	margin: 0 auto;
+	background-color: azure;
+	border-width: 4px 4px;
+	border-style: dashed solid;
+	border-color: red green;
+	border-collapse: collapse;
+}
+
+th {
+	text-align: center;
+	height: 50px;
+	width : 200px;
+}
+tr {
+	border-collapse: collapse;
+	border-color: teal;
+	border-width: 2px;
+}
+
+tr :hover{
+	background-color: #ffc0cb;
+}
+
+td{
+	text-align: center;
+	padding: 15px;
+}
+
+i {  
+  border: solid black;
+  border-width: 0 5px 5px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+i.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+i.down {
+    margin-bottom: 5px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}

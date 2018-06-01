@@ -1,0 +1,26 @@
+$(document).ready(function () {
+$(".update").click(function(event){
+console.log("Thy");
+// <input type="text" placeholder="New Column" id="new-column-name" value=""/>
+event.preventDefault();
+var oldData = array();
+var newData = {};
+var element = 
+$.ajax({
+    url:'php/updata.php',
+    type:"POST",
+    data: newData,
+    success:function(result){
+      if(result == "ok")
+      {
+
+      }
+      else
+      {
+
+      }
+    }
+                
+    });
+  });
+});
