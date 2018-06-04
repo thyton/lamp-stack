@@ -1,31 +1,51 @@
 function sortTable(event) {
     var targetCol = event.data.th;
-    if(targetCol.attr["sort-order"])
-    {
-       if (targetCol.attr["sort-order"] == "ASC")
-        targetCol.attr("sort-order","DESC");
-       else 
-        targetCol.attr("sort-order","ASC");
-    }
-    else
+    var newOrder = "ASC";
+    var isTargetSorted = false; // True if the target column was previously sorted
+
+    // Negates the sorting order when the target was previosly sorted
+    if(targetCol.attr("sort-order"))
     {  
-       // the old sorted column 
-       sortedCol = $("th:not(#operation-col-title)[sort-order!='']");        
-       if(sortedCol.length != 0)                                                         // marks that column to be unsorted
-         sortedCol[0].setAttribute("sort-order",'');                                   
-       // marks the target column to be sorted ascendingly
-       targetCol[0].setAttribute('sort-order', "ASC");              
+       isTargetSorted = true;
+       if (targetCol.attr("sort-order") == "ASC")
+          newOrder = "DESC";
+       else
+          newOrder = "ASC";
+       
     }
     
     $.ajax({
         url:'php/sortTable.php',
         type:"POST",
         data:{ col : event.data.col,
-               order: targetCol.attr["sort-order"]},
+               order: newOrder},
         success:function(result){
+            var symbols  = { "ASC": "down", "DESC" : "up"};
             var obj = $.parseJSON(result);
             if(obj.status == "ok")
-            {
+            {   
+                // the old sorted column                                                 
+                sortedCol = $("th:not(#operation-col-title)[sort-order!='']");           
+                
+                // checks if any other columns is sorted
+                if(sortedCol.length != 0)     
+                {   
+                    sortedCol.children().children(':hidden').show();
+                    
+                    // hides the icon of the previous order
+                    if(isTargetSorted)
+                        targetCol.find("." + symbols[targetCol.attr("sort-order")]).hide();
+                    else
+                        targetCol.find(".up").hide();
+                    // marks the old column to be unsorted                         
+                    sortedCol.attr("sort-order",''); 
+                }
+                else if(!isTargetSorted)
+                    targetCol.find(".up").hide();
+                
+                // marks the target column to be sorted with newOrder
+                targetCol.attr("sort-order", newOrder);
+                
                 container = $("#pianists-table-content");
                 container.empty();
                 var row; 
